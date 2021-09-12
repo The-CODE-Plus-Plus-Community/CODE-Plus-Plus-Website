@@ -1,9 +1,9 @@
 <template>
   <div class="app-wrapper">
     <div class="app">
-      <Navbar/>
+      <Navbar v-if="!navigation"/>
       <router-view />
-      <Footer />
+      <Footer v-if="!navigation"/>
     </div>
   </div>
 </template>
@@ -11,16 +11,41 @@
 <script>
 import Navbar from "./components/Navigation.vue";
 import Footer from './components/footer.vue'
+import firebase from 'firebase/app'
+import 'firebase/app'
 export default {
   name: "app",
   components: {Navbar, Footer},
   data() {
-    return {};
+    return {
+        navigation: null,
+    };
   },
-  created() {},
+  created() {
+      firebase.auth().onAuthStateChanged((user) => {
+          this.$store.commit("updateUser", user);
+          if(user){
+              this.$store.dispatch("getCurrentUser");
+              console.log(this.$store.state.profileEmail);
+          }
+      })
+      this.checkRoute();
+  },
   mounted() {},
-  methods: {},
-  watch: {},
+  methods: {
+      checkRoute() {
+          if(this.$route.name ==='Login' || this.$route.name === 'Register'){
+            this.navigation=true;
+            return;
+          }
+        this.navigation=false;
+      }
+  },
+  watch: {
+      $route(){
+          this.checkRoute();
+      }
+  },
 };
 </script>
 
@@ -50,6 +75,11 @@ export default {
   text-decoration: none;
   text-transform: uppercase;
   color: black;
+}
+.error{
+    text-align: center;
+    font-size: 12px;
+    color: red;
 }
 
 .link-light {
