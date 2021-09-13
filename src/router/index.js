@@ -3,6 +3,8 @@ import VueRouter from "vue-router";
 import Home from "../views/Home.vue";
 import Login from "../views/Login.vue";
 import Register from "../views/Register.vue"
+import Profile from '../views/Profile.vue';
+import AddResource from '../views/AddResource.vue'
 
 Vue.use(VueRouter);
 
@@ -29,6 +31,22 @@ const routes = [
     component: Register,
     meta: {
         title: "Register"
+    }
+  },
+  {
+    path: "/profile",
+    name: "Profile",
+    component: Profile,
+    meta: {
+        title: "Profile"
+    }
+  },
+  {
+    path: "/add-resource",
+    name: "AddResource",
+    component: AddResource,
+    meta: {
+        title: "AddResource"
     }
   }
 ];

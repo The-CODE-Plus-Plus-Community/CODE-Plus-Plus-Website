@@ -26,7 +26,7 @@ export default {
   z-index: 101;
   position: absolute;
   width: 100%;
-  height: 100%;
+  height: 167%;
   top: 0;
   background-color: rgba(0, 0, 0, 0.7);
 
@@ -45,6 +45,14 @@ export default {
 
     button {
       align-self: center;
+      margin-top: 20px;
+      padding: 10px 20px;
+      border-radius: 20px;
+      background-color: #303030;
+      color: #fff;
+      border: none;
+      letter-spacing: 2px;
+      cursor: pointer;
     }
   }
 }
