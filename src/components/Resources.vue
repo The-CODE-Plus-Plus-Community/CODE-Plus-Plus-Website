@@ -6,6 +6,14 @@
       <div class="resource-cards">
         <div class="card-item">
             <img src="../assets/blogCards/stock-1.jpg" alt="" class="img">
+            <div class="icons">
+                <div class="icon">
+                    <img src="../assets/Icons/editing.png" alt="" >
+                </div>
+                <div class="icon">
+                    <img src="../assets/Icons/delete.png" alt="" >
+                </div>
+            </div>
             <div class="name">Html&Css</div>
             <p class="description">
                 This resources are provided for absolute beginners, if you are just starting out you can go through these and start working with projects next week onwards...
@@ -14,6 +22,14 @@
         </div>
         <div class="card-item">
             <img src="../assets/blogCards/stock-2.jpg" alt="" class="img">
+            <div class="icons">
+                <div class="icon">
+                    <img src="../assets/Icons/editing.png" alt="" >
+                </div>
+                <div class="icon">
+                    <img src="../assets/Icons/delete.png" alt="" >
+                </div>
+            </div>
             <div class="name">Html&Css</div>
             <p class="description">
                 This resources are provided for absolute beginners, if you are just starting out you can go through these and start working with projects next week onwards...
@@ -22,6 +38,14 @@
         </div>
         <div class="card-item">
             <img src="../assets/blogCards/stock-3.jpg" alt="" class="img">
+            <div class="icons">
+                <div class="icon">
+                    <img src="../assets/Icons/editing.png" alt="" >
+                </div>
+                <div class="icon">
+                    <img src="../assets/Icons/delete.png" alt="" >
+                </div>
+            </div>
             <div class="name">Html&Css</div>
             <p class="description">
                 This resources are provided for absolute beginners, if you are just starting out you can go through these and start working with projects next week onwards...
@@ -30,6 +54,14 @@
         </div>
         <div class="card-item">
             <img src="../assets/blogCards/stock-1.jpg" alt="" class="img">
+            <div class="icons">
+                <div class="icon">
+                    <img src="../assets/Icons/editing.png" alt="" >
+                </div>
+                <div class="icon">
+                    <img src="../assets/Icons/delete.png" alt="" >
+                </div>
+            </div>
             <div class="name">Html&Css</div>
             <p class="description">
                 This resources are provided for absolute beginners, if you are just starting out you can go through these and start working with projects next week onwards...
@@ -38,6 +70,14 @@
         </div>
         <div class="card-item">
             <img src="../assets/blogCards/stock-4.jpg" alt="" class="img">
+            <div class="icons">
+                <div class="icon">
+                    <img src="../assets/Icons/editing.png" alt="" >
+                </div>
+                <div class="icon">
+                    <img src="../assets/Icons/delete.png" alt="" >
+                </div>
+            </div>
             <div class="name">Html&Css</div>
             <p class="description">
                 This resources are provided for absolute beginners, if you are just starting out you can go through these and start working with projects next week onwards...
@@ -46,6 +86,14 @@
         </div>
         <div class="card-item">
             <img src="../assets/blogCards/stock-3.jpg" alt="" class="img">
+            <div class="icons">
+                <div class="icon">
+                    <img src="../assets/Icons/editing.png" alt="" >
+                </div>
+                <div class="icon">
+                    <img src="../assets/Icons/delete.png" alt="" >
+                </div>
+            </div>
             <div class="name">Html&Css</div>
             <p class="description">
                 This resources are provided for absolute beginners, if you are just starting out you can go through these and start working with projects next week onwards...
@@ -186,5 +234,25 @@ export default {
     cursor: pointer;
     transform: scale(1.01);
     text-decoration: underline;
+}
+.resource-cards .card-item .icons{
+    position: absolute;
+    top: 10px;
+    right: 0;
+}
+.resource-cards .card-item .icons .icon{
+    display: inline-block;
+    height: 45px;
+    width: 45px;
+    background: gainsboro;
+    border-radius: 30px;
+    margin-right: 4px;
+}
+.resource-cards .card-item .icons .icon img{
+    width: 25px;
+    margin: 10px;
+}
+.resource-cards .card-item .icons:hover{
+    cursor: pointer;
 }
 </style>>
