@@ -2,20 +2,18 @@
   <div class="modal" ref="modal">
       <div class="modal-content">
           <div class="card-item">
-            <img :src="this.resourceCoverPhoto" alt="" class="img">
+            <img :src="this.resourceCoverPhoto" class="img">
             <div class="icons">
                 <div class="icon">
-                    <img src="../assets/Icons/editing.png" alt="" >
+                    <img src="../assets/Icons/editing.png" >
                 </div>
                 <div class="icon">
-                    <img src="../assets/Icons/delete.png" alt="" >
+                    <img src="../assets/Icons/delete.png" >
                 </div>
             </div>
-            <div class="name">Html&Css</div>
-            <p class="description">
-                {{ this.content}}
-            </p>
-            <a href="#">View More</a>
+            <div class="name">{{this.Title}}</div>
+            <div class="description" v-html="content"></div>
+            <a :href="openLink" target="_blank">View More</a>
         </div>
         <button @click="closePreview">Close</button>
       </div>
@@ -35,6 +33,12 @@ computed: {
     },
     content() {
         return this.$store.state.resourceHTML;
+    },
+    openLink() {
+        return this.$store.state.resourceLink;
+    },
+    Title() {
+        return this.$store.state.resourceTitle;
     }
 }
 }
@@ -105,9 +109,9 @@ computed: {
     border-radius: 20px;
     text-align: center;
 }
-.card-item img{
+.card-item .img{
     width: 340px;
-    height: max-content;
+    height: 190px;
     overflow: hidden;
     transition: .5s all ease;
 }

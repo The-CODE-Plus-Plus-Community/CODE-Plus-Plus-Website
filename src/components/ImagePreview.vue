@@ -3,7 +3,6 @@
     <div class="modal-content">
       <close @click="closePreview" class="icon" />
       <img :src="this.resourceCoverPhoto" alt="" />
-      <p>{{ this.content}}</p>
     </div>
   </div>
 </template>
@@ -23,9 +22,6 @@ export default {
     resourceCoverPhoto() {
       return this.$store.state.resourcePhotoFileURL;
     },
-    content() {
-        return this.$store.state.resourceHTML;
-    }
   },
 };
 </script>
@@ -68,7 +64,6 @@ export default {
       margin-top: 16px;
       display: block;
       width: auto;
-      height: 100%;
       box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
     }
   }

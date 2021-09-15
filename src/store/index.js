@@ -8,13 +8,15 @@ Vue.use(Vuex)
 
 export default new Vuex.Store({
   state: {
+      resourcePosts: [],
+      postLoaded: null,
       resourceHTML: "Add your resource and content here...",
       resourceTitle: "",
       resourcePhotoName: "",
       resourcePhotoFileURL: "",
       resourcePhotoPreview: null,
       resourceModalPreview: null,
-      resourceLink: null,
+      resourceLink: "",
       user:null,
       profileEmail: null,
       profileFirstName: null,
@@ -23,13 +25,22 @@ export default new Vuex.Store({
       profileId: null,
       profileInitials: null
   },
+  getters: {
+    resourcePostsFeed(state) {
+      return state.resourcePosts.slice(0, 6);
+    },
+    resourceAllPosts(state) {
+        return state.resourcePosts;
+    }
+  },
   mutations: {
-      newResourcePost(state, payload) {
+    newResourceContent(state, payload) {
         state.resourceHTML = payload;
-      },
+        // console.log(state.resourceHTML);
+    },
       updateResourceTitle(state,payload) {
         state.resourceTitle = payload;
-        console.log(state.resourceTitle);
+        // console.log(state.resourceH);
       },
       fileNameChanged(state, payload) {
         state.resourcePhotoName = payload;
@@ -42,7 +53,17 @@ export default new Vuex.Store({
       },
       openResourcePreview(state) {
           state.resourceModalPreview = !state.resourceModalPreview;
-        //   state.resourcePhotoFileURL = state.resourcePhotoFileURL;
+      },
+      setResourceState(state, payload) {
+        state.resourceTitle = payload.resourceTitle;
+        state.resourceHTML = payload.resourceHTML;
+        state.resourceLink = payload.resourceLink;
+        state.resourcePhotoFileURL = payload.resourceCoverPhoto;
+        state.resourcePhotoName = payload.resourceCoverPhotoName;
+        state.resourceLink = payload.resourceLink;
+      },
+      filterResourcePost(state, payload) {
+        state.resourcePosts = state.resourcePosts.filter(post => post.resourceID !== payload);
       },
       addResourceLink(state, payload) {
           state.resourceLink = payload;
@@ -86,8 +107,36 @@ export default new Vuex.Store({
               username: state.profileUserName
           });
           commit("setprofileIcon");
-      }
+      },
+      async deletePost({commit}, payload) {
+        console.log(payload);
+        const getPost = await db.collection('blogPosts').doc(payload);
+        // console.log(getPost);
+        await getPost.delete();
+        commit('filterResourcePost', payload);
+      },
+      async updatePost({commit, dispatch}, payload) {
+          commit('filterResourcePost', payload);
+          await dispatch("getPost");
+      },
+      async getPost({ state }) {
+        const dataBase = await db.collection("blogPosts").orderBy("date", "desc");
+        const dbResults = await dataBase.get();
+        dbResults.forEach((doc) => {
+          if (!state.resourcePosts.some((post) => post.blogID === doc.id)) {
+            const data = {
+              resourceID: doc.data().resourceID,
+              resourceHTML: doc.data().resourceHTML,
+              resourceCoverPhoto: doc.data().resourceCoverPhoto,
+              resourceTitle: doc.data().resourceTitle,
+              resourceDate: doc.data().date,
+              resourceCoverPhotoName: doc.data().resourceCoverPhotoName,
+              resourceLink: doc.data().resourceLink,
+            };
+            state.resourcePosts.push(data);
+        }
+        });
+        state.postLoaded = true;
+      },
   },
-  modules: {
-  }
 })

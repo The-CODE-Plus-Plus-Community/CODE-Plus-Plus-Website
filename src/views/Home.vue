@@ -15,6 +15,11 @@ import Resources from "../components/Resources.vue"
 export default {
   name: "Home",
   components: { Mentors, Resources, Working, Banner },
+//   computed: {
+//     resourcePostsFeed() {
+//       return this.$store.getters.resourcePostsFeed;
+//     },
+//   },
 };
 </script>
 <style scoped>
