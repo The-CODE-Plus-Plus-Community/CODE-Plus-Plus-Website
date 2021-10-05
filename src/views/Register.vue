@@ -20,6 +20,10 @@
                 <router-link class="button" :to="{ name: 'Login'}">LOGIN</router-link>
             </div>
         </div>
+        <div class="mobile-nav-content">
+            <h3>Don't have an account already ?</h3>
+            <router-link class="button" :to="{ name: 'Register'}">SIGNUP</router-link>
+        </div>
     </div>
 </template>
 
@@ -139,8 +143,11 @@ export default {
     font-size: 1.2rem;
     text-align: center;
 }
+.mobile-nav-content{
+    display: none;
+}
 .login-content h1, .login-content button{
-    margin-top: 0 20px;
+    margin: 0 20px;
     /* padding: 20px; */
 }
 .login-content .inputs{
@@ -156,13 +163,67 @@ export default {
 }
 .login-content button{
     margin: 10px 80px;
-    padding: 5px 10px;
-    border-radius: 15px;
+    padding: 10px 40px;
+    border-radius: 5px;
     border: none;
     background: #303030;
     cursor: pointer;
     text-decoration: none;
-font-size: 1.2rem;
-color: #fff;
+    font-size: 1.2rem;
+    color: #fff;
+}
+@media(max-width: 1300px){
+    .login{
+        flex-direction: column;
+    }
+    .mobile-nav-content{
+        width: 100%;
+        height: 200px;
+        background-color: #303030;
+        display: block;
+        text-align: center;
+    }
+    .background{
+        display: none;
+    }
+    .login-content{
+        width: 100vw;
+        margin-left: 0;
+        align-items: center;
+        font-size: 1rem;
+    }
+    .login-content input{
+        width: 40vw;
+    }
+    .mobile-nav-content h3{
+        margin: 30px 0;
+        color:rgba(255, 255, 255, 0.89);
+        font-size: 1.5rem;
+    }
+    
+    .mobile-nav-content .button{
+        padding: 10px 120px;
+        border: none;
+        outline: none;
+        border: 3px solid #fff;
+        background: transparent;
+        border-radius: 60px;
+        font-size: 1.4rem;
+        letter-spacing: 2px;
+        color: rgba(255, 255, 255, 0.89);
+        font-weight: 800;
+        box-shadow: 4px 10px 27px rgba(7, 4, 4, 0.332);
+        text-decoration: none;
+    }
+    .mabile-nav-content .button:hover{
+        box-shadow: 4px 20px 17px rgba(7, 4, 4, 0.332);
+        cursor: pointer;
+    }
+
+}
+@media(max-width: 500px){
+    .login-content input{
+        width: 70vw;
+    }
 }
 </style>

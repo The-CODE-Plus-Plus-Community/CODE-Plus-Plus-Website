@@ -4,30 +4,27 @@
       <div class="title"><h1>RESOURCES</h1>
       </div>
       <div class="resource-cards">     
-        <ResourceCard :post="post" v-for="(post, index) in resourcePostsFeed" :key="index" class="card-item"/>
+        <ResourceCard :post="post" v-for="(post, index) in resourceAllPosts" :key="index" class="card-item"/>
     </div> 
-        <div class="resource-route">
-        <p>SEE MORE</p>
-    </div>
   </div>
 </template>
+
 <script>
-import ResourceCard from './resourceCard.vue'
+import ResourceCard from '../components/resourceCard.vue'
 export default {
-    name: "Resources",
-    props: ["post"],
+    name: "Resource",
     components: {
         ResourceCard
     },
     computed: {
-        resourcePostsFeed() {
-        return this.$store.getters.resourcePostsFeed;
-        },
-    },
+        resourceAllPosts() {
+            return this.$store.getters.resourceAllPosts;
+        }
+    }
 }
 </script>
 
-<style lang="css" scoped>
+<style scoped>
 @import url('https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,200;0,300;1,200;1,300&display=swap');
 @import url('https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,200;0,300;1,200&display=swap');
 
@@ -39,7 +36,7 @@ export default {
     font-family: 'Montserrat', sans-serif;
 }
 .resources{
-    margin-top: 100px;
+    /* margin-top: 100px; */
     overflow-x: hidden;
 }
 .title { 
@@ -117,4 +114,4 @@ export default {
     transform: scale(1.01);
     text-decoration: underline;
 }
-</style>>
+</style>

@@ -5,7 +5,7 @@
       <Loading v-show="loading" />
       <div class="container">
           <div :class="{invisible: !error}" class="err-message">
-              <p><span>Error: </span>{{ this.errorMsg}}</p>
+              <p><span>Error: </span>{{ this.errorMsg }}</p>
           </div>
           <div class="resource-info">
             <input type="text" placeholder="Enter Resource Title" v-model="resourceTitle">
@@ -21,7 +21,7 @@
                 <vue-editor  v-model="resourceHTML" useCustomImageHandler/>
           </div>
           <div class="resource-actions">
-              <button @click="uploadResource">Post Resource</button>
+              <button @click="updateResource">Post Resource</button>
               <button @click="modalPreview" class="router-button">Post Preview</button>
           </div>
       </div>
@@ -53,6 +53,8 @@ export default {
             error: null,
             loading: null,
             errorMsg: "",
+            routeID: null,
+            currentResource: null,
             editorSettings: {
                 modules: {
                     ImageResize : {},
@@ -92,6 +94,13 @@ export default {
             }
         },
     }, 
+    async mounted() {
+        this.routeID = this.$route.params.resourceid;
+        this.currentResource = await this.$store.state.resourcePosts.filter((post) => {
+            return post.resourceID === this.routeID;
+        });
+        this.$store.commit('setResourceState', this.currentResource[0]);
+    },
     methods: {
         fileChange() {
             this.file = this.$refs.resourcePhoto.files[0];
@@ -105,7 +114,8 @@ export default {
         modalPreview() {
             return this.$store.commit("openResourcePreview");
         },
-        uploadResource() {
+        async updateResource() {
+            const dataBase = await db.collection('blogPosts').doc(this.routeID);
             if(this.resourceTitle.length !==0 && this.resourceHTML.length !== 0 && this.resourceLink.length !==0){
                 if(this.file){
                     this.loading = true;
@@ -118,8 +128,6 @@ export default {
                         this.loading=false;
                     }, async () => {
                         const downloadURL = await docRef.getDownloadURL();
-                        const timestamp = await Date.now();
-                        const dataBase = await db.collection("blogPosts").doc();
 
                         await dataBase.set({
                             resourceID: dataBase.id,
@@ -128,21 +136,20 @@ export default {
                             resourceCoverPhotoName: this.resourcePhotoName,
                             resourceTitle: this.resourceTitle,
                             profileID: this.profileId,
-                            date: timestamp,
-                            resourceLink: this.resourceLink,
                         });
                         this.loading = false;
                         this.$router.push({ name: "Resource"});
                     })
                     return;
                 }
-                this.error = true;
-                this.errorMsg = "Please upload a cover photo!!!";
-                setTimeout(() => {
-                    this.error=false;
-                    this.errorMsg=""
-                }, 5000)
-                return;
+                this.loading = true;
+                await dataBase.update({
+                    resourceHTML: this.resourceHTML,
+                    resourceTitle: this.resourceTitle,
+                });
+                await this.$store.dispatch('updatePost', this.routeID);
+                this.loading = false;
+                this.$router.push({name: "Resource" });
             }
             this.error = true;
             this.errorMsg = "Please fill out the title, link and description!!!";

@@ -9,7 +9,8 @@
           <div class="nav-links">
               <ul v-show="!mobile">
                   <router-link class="link" to="#">Challenge</router-link>
-                  <router-link class="link" to="#">Resource</router-link>
+                  <router-link class="link" :to="{name : 'Resource' }">Resource</router-link>
+                  <router-link class="link" :to="{name: 'AddResource'}">Add Resource</router-link>
                   <router-link class="link" to="#">Contact-Us</router-link>
                   <router-link v-if="!user" class="link" :to="{ name: 'Login'}">Login/Signup</router-link>
               </ul>
@@ -26,7 +27,7 @@
                       </div>
                       <div class="options">
                           <div class="option">
-                              <router-link class="option" to="#">
+                              <router-link class="option" :to="{ name: 'Profile'}">
                                   <userIcon class="icon"/>
                                   <p>Profile</p>
                               </router-link>
@@ -38,7 +39,7 @@
                               </router-link>
                           </div>
                           <div class="option">
-                              <div @click="signOut" class="option" to="#">
+                              <div @click="signOut" class="option">
                                   <signOutIcon class="icon"/>
                                   <p>Sign Out</p>
                               </div>
@@ -52,9 +53,9 @@
       <transition name="mobile-nav">
           <ul class="mobile-nav" v-show="mobileNav">
             <router-link class="link" to="#">Challenge</router-link>
-            <router-link class="link" to="#">Resource</router-link>
+            <router-link class="link" :to="{name : 'Resource' }">Resource</router-link>
             <router-link class="link" to="#">Contact-Us</router-link>
-            <router-link class="link" :to="{ name: 'Login'}">Login/Signup</router-link>
+            <router-link v-if="!user" class="link" :to="{ name: 'Login'}">Login/Signup</router-link>
           </ul>
       </transition>
   </header>
@@ -183,6 +184,7 @@ header {
           right: 0;
           width: 250px;
           background-color: #303030;
+          z-index: 1000;
           box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
           .info {
             display: flex;

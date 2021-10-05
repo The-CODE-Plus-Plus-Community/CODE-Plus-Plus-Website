@@ -8,6 +8,7 @@
         </div>
         <div>
             <div class="login-content">
+                    <img src="../assets/Profile-login.png" alt="">
                 <h1>Login to your Account</h1>
                 <div class="inputs">
                     <input type="text" placeholder="Enter your email" v-model="email"> <br>
@@ -17,6 +18,10 @@
                 <div v-show="error" class="error">{{ this.errorMsg }}</div>
                 <button @click.prevent="signIn">Login</button>
             </div>
+        </div>
+        <div class="mobile-nav-content">
+            <h3>Don't have an account already ?</h3>
+            <router-link class="button" :to="{ name: 'Register'}">SIGNUP</router-link>
         </div>
     </div>
 </template>
@@ -105,15 +110,22 @@ export default {
     box-shadow: 4px 20px 17px rgba(7, 4, 4, 0.332);
     cursor: pointer;
 }
+.mobile-nav-content{
+    display: none;
+}
 .login-content{
     padding: 10vh;
-    padding-top: 30vh;
+    padding-top: 20vh;
     display: flex;
     height: 60vh;
     flex-direction: column;
     justify-content: space-between;
+    align-items: center;
     font-size: 1.2rem;
     text-align: center;
+}
+.login-content img{
+    width: 200px;
 }
 .login-content h1, .login-content button{
     margin-top: 0 20px;
@@ -132,7 +144,7 @@ export default {
 }
 .login-content button{
     margin: 10px 120px;
-    padding: 5px 10px;
+    padding: 5px 40px;
     border-radius: 15px;
     border: none;
     cursor: pointer;
@@ -140,5 +152,57 @@ export default {
 font-size: 1.2rem;
 color: #fff;
 text-decoration: none;
+}
+@media(max-width: 1300px){
+    .mobile-nav-content{
+        width: 100%;
+        height: 200px;
+        background-color: #303030;
+        display: block;
+        text-align: center;
+    }
+    .login{
+        flex-direction: column;
+    }
+    .login-content{
+        font-size: 1rem;
+    }
+    .background{
+        display: none;
+    }
+    .login-content{
+        padding-top: 5vh;
+        width: 100vw;
+        /* align-items: center; */
+    }
+    .mobile-nav-content h3{
+        margin: 30px 0;
+        color:rgba(255, 255, 255, 0.89);
+        font-size: 1.5rem;
+    }
+    
+    .mobile-nav-content .button{
+        padding: 10px 120px;
+        border: none;
+        outline: none;
+        border: 3px solid #fff;
+        background: transparent;
+        border-radius: 60px;
+        font-size: 1.4rem;
+        letter-spacing: 2px;
+        color: rgba(255, 255, 255, 0.89);
+        font-weight: 800;
+        box-shadow: 4px 10px 27px rgba(7, 4, 4, 0.332);
+        text-decoration: none;
+    }
+    .mabile-nav-content .button:hover{
+        box-shadow: 4px 20px 17px rgba(7, 4, 4, 0.332);
+        cursor: pointer;
+    }
+}
+@media(max-width: 500px){
+    .login-content input{
+        width: 70vw;
+    }
 }
 </style>
